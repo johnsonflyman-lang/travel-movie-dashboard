@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="preload" as="image" href="高光時刻__飛行傘.png" fetchpriority="high"> <link rel="preload" as="image" href="高光時刻__浮淺.png" fetchpriority="high"> <link rel="preload" as="image" href="高光時刻__滑雪.png" fetchpriority="high">
   <title>MY LIFE · MY JOURNEY｜姜宇宸</title>
   <style>
     :root { --bg:#edf3f8; --ink:#172033; --muted:#657089; --line:#dce5ef; --card:#fff; --brand:#3157d5; --brand2:#08a6a6; --warm:#f5b942; }
@@ -38,11 +38,11 @@
     .section-head { display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin:28px 0 13px; }
     h2 { margin:0; font-size:22px; }
     .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px; }
-    .card { overflow:hidden; }
-    .cover { height:190px; padding:18px; display:flex; align-items:flex-end; color:white; background-size:cover; background-position:center; background-color:#334155; }
+    .card { overflow:hidden; content-visibility:auto; contain-intrinsic-size:380px; }
+    .cover { position:relative; height:190px; padding:18px; display:flex; align-items:flex-end; color:white; background-size:cover; background-position:center; background-color:#334155; } .cover::after { content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(0deg,#111b,transparent 65%); pointer-events:none; } .cover-image { position:absolute; inset:0; z-index:0; width:100%; height:100%; object-fit:cover; display:block; }
     .cover:not(.movie) { background-image:linear-gradient(0deg,#111b,transparent 65%),linear-gradient(135deg,#4338ca,#0ea5a4); }
     .cover.movie { background:linear-gradient(135deg,#7c3aed,#ec4899); }
-    .cover h3 { margin:0; font-size:23px; text-shadow:0 2px 12px #1118; }
+    .cover h3 { position:relative; z-index:2; margin:0; font-size:23px; text-shadow:0 2px 12px #1118; }
     .body { padding:16px; }
     .meta { display:flex; justify-content:space-between; gap:10px; color:var(--muted); font-size:13px; margin-bottom:9px; }
     .tag { display:inline-block; color:#475569; background:#eef2f7; padding:4px 8px; border-radius:999px; font-size:12px; margin:2px 4px 2px 0; }
@@ -157,7 +157,7 @@
     const $ = id => document.getElementById(id);
     const years = [...new Set(records.map(r=>r.year))].sort((a,b)=>b-a);
     years.forEach(y => $('year').insertAdjacentHTML('beforeend', `<option value="${y}">${y}</option>`));
-    function filtered(){ return records.filter(r => (state.kind==='all'||r.kind===state.kind) && (state.year==='all'||String(r.year)===state.year) && `${r.title} ${r.place} ${r.note||''} ${(r.tags||[]).join(' ')}`.toLowerCase().includes(state.query.toLowerCase())); }
+    function filtered(){ return records.filter(r => (state.kind==='all'||r.kind===state.kind) && (state.year==='all'||String(r.year)===state.year) && `${r.title} ${r.place} ${r.note||''} ${(r.tags||[]).join(' ')}`.toLowerCase().includes(state.query.toLowerCase())).sort((a,b)=>Number(b.year)-Number(a.year)); }
     const siteAssetRoot='';
     function assetUrl(relative){ return siteAssetRoot + relative.split('/').map(encodeURIComponent).join('/'); }
     function fileUrl(path){ const root='F:/姜宇宸/05.照片/04.出國旅遊/'; return path ? assetUrl(path.replace(root,'').replace(/\//g,'__')) : ''; }
@@ -177,7 +177,7 @@
     const folderKey=r=>r.folder.split('/').pop();
     const countryForRecord=r=>recordCountries[folderKey(r)]||r.place.split(' ')[0];
     const driveFolderUrl=r=>`https://drive.google.com/drive/folders/${driveFolders[folderKey(r)]||driveTravelRoot.split('/').pop()}`;
-    function card(r){ const isTravel=r.kind==='travel'; const photo=fileUrl(r.photo); const style=photo?` style="background-image:linear-gradient(0deg,#111b,transparent 65%),url('${photo}')"`:''; const tags=isTravel?['旅遊照片',`${r.count} 張`]:r.tags; return `<article class="card"><div class="cover ${isTravel?'':'movie'}"${style}><h3>${r.title}</h3></div><div class="body"><div class="meta"><span>${r.place}</span><span>${r.year}</span></div><p>${isTravel?`照片集：${r.count} 張照片。這趟旅程的代表影像與完整分類已保存於雲端。`:r.note}</p><div>${tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div><div class="actions">${isTravel?`<a href="${driveFolderUrl(r)}" target="_blank" rel="noreferrer">開啟對應雲端資料夾</a><a href="#travel-map-section" onclick="focusMap('${folderKey(r)}');return false;">在地圖上查看</a>`:''}<a href="https://www.google.com/search?q=${encodeURIComponent(r.place+' '+r.title)}" target="_blank" rel="noreferrer">搜尋相關</a>${!isTravel?`<a href="${r.imdb}" target="_blank" rel="noreferrer">IMDb</a>`:''}</div></div></article>`; }
+    function card(r){ const isTravel=r.kind==='travel'; const photo=fileUrl(r.photo); const image=photo?`<img class="cover-image" src="${photo}" alt="${r.title}代表照片" loading="lazy" decoding="async">`:''; const tags=isTravel?['旅遊照片',`${r.count} 張`]:r.tags; return `<article class="card"><div class="cover ${isTravel?'':'movie'}">${image}<h3>${r.title}</h3></div><div class="body"><div class="meta"><span>${r.place}</span><span>${r.year}</span></div><p>${isTravel?`照片集：${r.count} 張照片。這趟旅程的代表影像與完整分類已保存於雲端。`:r.note}</p><div>${tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div><div class="actions">${isTravel?`<a href="${driveFolderUrl(r)}" target="_blank" rel="noreferrer">開啟對應雲端資料夾</a><a href="#travel-map-section" onclick="focusMap('${folderKey(r)}');return false;">在地圖上查看</a>`:''}<a href="https://www.google.com/search?q=${encodeURIComponent(r.place+' '+r.title)}" target="_blank" rel="noreferrer">搜尋相關</a>${!isTravel?`<a href="${r.imdb}" target="_blank" rel="noreferrer">IMDb</a>`:''}</div></div></article>`; }
     const highlightPhotos=['高光時刻__飛行傘.png','高光時刻__浮淺.png','高光時刻__滑雪.png','高光時刻__IMG_1819.JPG','高光時刻__IMG_E9756.JPG'];
     function initHighlightCollage(){ const el=$('highlight-collage'); if(!el)return; el.innerHTML=highlightPhotos.map(p=>`<div class="highlight-tile" style="background-image:url('${assetUrl(p)}')"></div>`).join(''); }
     const mapMarkers={};
