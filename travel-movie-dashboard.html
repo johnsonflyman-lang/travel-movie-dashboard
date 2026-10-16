@@ -158,7 +158,7 @@
     const years = [...new Set(records.map(r=>r.year))].sort((a,b)=>b-a);
     years.forEach(y => $('year').insertAdjacentHTML('beforeend', `<option value="${y}">${y}</option>`));
     function filtered(){ return records.filter(r => (state.kind==='all'||r.kind===state.kind) && (state.year==='all'||String(r.year)===state.year) && `${r.title} ${r.place} ${r.note||''} ${(r.tags||[]).join(' ')}`.toLowerCase().includes(state.query.toLowerCase())); }
-    const siteAssetRoot='assets/';
+    const siteAssetRoot='';
     function assetUrl(relative){ return siteAssetRoot + relative.split('/').map(encodeURIComponent).join('/'); }
     function fileUrl(path){ const root='F:/姜宇宸/05.照片/04.出國旅遊/'; return path ? assetUrl(path.replace(root,'').replace(/\//g,'__')) : ''; }
     const driveTravelRoot='https://drive.google.com/drive/folders/1JVrVuIHJcuiJw8JShIqARejLUQMMY33v';
