@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>遠行成章｜我的世界旅誌與觀影檔案｜姜宇宸</title>
+  <style>
+    :root { --bg:#edf3f8; --ink:#172033; --muted:#657089; --line:#dce5ef; --card:#fff; --brand:#3157d5; --brand2:#08a6a6; --warm:#f5b942; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:radial-gradient(circle at 10% 0%,#dbeafe 0,transparent 28%),linear-gradient(135deg,#eef5f9,#e6edf5 55%,#f8fafc); font-family: "Segoe UI", "Noto Sans TC", system-ui, sans-serif; }
+    a { color:inherit; }
+    .shell { max-width:1180px; margin:auto; padding:28px 20px 48px; }
+    header { display:flex; justify-content:space-between; align-items:flex-end; gap:18px; margin-bottom:22px; }
+    .hero { position:relative; overflow:hidden; min-height:300px; padding:36px; border-radius:30px; color:#fff; background:linear-gradient(115deg,#07152cf4 0%,#102b52df 48%,#087f83d9 100%); box-shadow:0 24px 55px #102a5030; }
+    .hero::after { content:""; position:absolute; inset:0; opacity:.2; background-image:linear-gradient(120deg,transparent 0 48%,#fff 48.2% 48.5%,transparent 48.7%),linear-gradient(0deg,transparent 0 80%,#fff 80.2% 80.5%,transparent 80.7%); background-size:140px 140px,180px 180px; pointer-events:none; }
+    .highlight-collage { position:absolute; inset:0; display:grid; grid-template-columns:1.15fr .9fr .9fr; grid-template-rows:1fr 1fr; gap:5px; opacity:.62; transform:scale(1.04) rotate(-1deg); filter:saturate(1.15); }
+    .highlight-tile { min-width:0; min-height:0; background-position:center; background-size:cover; }
+    .highlight-tile:nth-child(1) { grid-row:1 / 3; grid-column:1; }
+    .highlight-tile:nth-child(2) { background-position:center 35%; }
+    .highlight-tile:nth-child(3) { background-position:center 45%; }
+    .hero > .highlight-collage { position:absolute; z-index:0; }
+    .hero > div { position:relative; z-index:1; }
+    .eyebrow { color:#f9d77e; font-size:12px; font-weight:800; letter-spacing:.14em; }
+    h1 { margin:10px 0 0; font-size:clamp(30px,5vw,58px); line-height:1.08; letter-spacing:-.04em; text-shadow:0 4px 20px #0008; }
+    .intro { max-width:650px; color:#e8f2ff; line-height:1.8; margin:16px 0 0; }
+    .hero .muted { color:#d5e6f8; }
+    .controls { display:flex; flex-wrap:wrap; gap:10px; margin:22px 0; }
+    input, select, button { font:inherit; }
+    input, select { border:1px solid var(--line); background:var(--card); border-radius:12px; padding:11px 13px; color:var(--ink); }
+    input { min-width:250px; flex:1; }
+    button { border:0; border-radius:12px; padding:11px 15px; cursor:pointer; background:#e9edff; color:#303878; font-weight:650; }
+    button.active, button:hover { background:var(--brand); color:white; }
+    .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:18px 0 28px; }
+    .stat, .card { background:rgba(255,255,255,.94); border:1px solid var(--line); border-radius:20px; box-shadow:0 14px 32px rgba(31,42,74,.09); }
+    .stat { padding:18px; }
+    .stat strong { display:block; font-size:28px; margin-top:4px; }
+    .stat span, .muted { color:var(--muted); font-size:13px; }
+    .section-head { display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin:28px 0 13px; }
+    h2 { margin:0; font-size:22px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px; }
+    .card { overflow:hidden; }
+    .cover { height:190px; padding:18px; display:flex; align-items:flex-end; color:white; background-size:cover; background-position:center; background-color:#334155; }
+    .cover:not(.movie) { background-image:linear-gradient(0deg,#111b,transparent 65%),linear-gradient(135deg,#4338ca,#0ea5a4); }
+    .cover.movie { background:linear-gradient(135deg,#7c3aed,#ec4899); }
+    .cover h3 { margin:0; font-size:23px; text-shadow:0 2px 12px #1118; }
+    .body { padding:16px; }
+    .meta { display:flex; justify-content:space-between; gap:10px; color:var(--muted); font-size:13px; margin-bottom:9px; }
+    .tag { display:inline-block; color:#475569; background:#eef2f7; padding:4px 8px; border-radius:999px; font-size:12px; margin:2px 4px 2px 0; }
+    .actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+    .actions a { text-decoration:none; font-size:13px; color:var(--brand); border:1px solid #dfe3ff; padding:8px 10px; border-radius:10px; background:#f8faff; }
+    .actions a:hover { background:#f0f2ff; }
+    .empty { grid-column:1/-1; padding:34px; text-align:center; color:var(--muted); border:1px dashed #cbd5e1; border-radius:18px; }
+    .map-shell { background:var(--card); border:1px solid var(--line); border-radius:20px; overflow:hidden; box-shadow:0 10px 30px rgba(31,42,74,.05); }
+    #travel-map { position:relative; height:540px; overflow:hidden; background:#0e4263; border:8px solid #25282b; border-radius:4px; box-shadow:inset 0 0 0 2px #9b704d,inset 0 0 42px #061d31,0 16px 28px #29323d26; }
+    .offline-map svg { display:block; width:100%; height:100%; }
+    .offline-map .world-vector { position:absolute; inset:0; z-index:1; width:100%; height:100%; object-fit:fill; }
+    .offline-map .map-overlay { position:absolute; inset:0; z-index:2; pointer-events:none; }
+    .offline-map .ocean { fill:url(#oceanFill); }
+    .offline-map .graticule { stroke:#bce5f344; stroke-width:1; fill:none; stroke-dasharray:4 8; }
+    .offline-map .land { fill:url(#landFill); stroke:#71452f; stroke-width:1.8; opacity:.99; filter:url(#woodTexture); }
+    .offline-map .country-boundary { stroke:#fff4e5aa; stroke-width:1.4; fill:none; }
+    .offline-map .continent-label { display:none; }
+    .offline-map .country-label { fill:#5f3c2b; font-size:13px; font-weight:800; text-anchor:middle; paint-order:stroke; stroke:#fff2d9; stroke-width:3px; stroke-linejoin:round; opacity:.95; }
+    .offline-map .country-label.visited { fill:#a63e2d; font-size:15px; opacity:1; }
+    .offline-map .ocean-label { fill:#e4f5fa; font-size:17px; font-weight:700; letter-spacing:4px; text-anchor:middle; opacity:.9; }
+    .offline-map .compass { fill:#fff0c7; stroke:#fff0c7; opacity:.9; }
+    .offline-map .country-dot { fill:#d97943; stroke:#fff7e8; stroke-width:1.5; }
+    .offline-map .country-label.visited .country-dot { fill:#d95737; }
+    .map-toolbar { position:absolute; z-index:3; left:16px; top:14px; padding:8px 13px; border-radius:999px; color:#70452d; background:#fff8e9ee; border:1px solid #c7925f; box-shadow:0 4px 12px #70452d22; font-size:13px; font-weight:800; }
+    .map-points { position:absolute; inset:0; z-index:4; }
+    .map-marker { position:absolute; width:18px; height:18px; padding:0; border:3px solid #fff7e8; border-radius:50% 50% 50% 0; background:#e7663e; box-shadow:0 0 0 5px #e7663e26,0 3px 12px #70452d55; transform:translate(-50%,-90%) rotate(-45deg); cursor:pointer; }
+    .map-marker span { display:block; width:100%; height:100%; border-radius:50%; background:#fff; transform:scale(.35) rotate(45deg); }
+    .map-marker b { position:absolute; left:12px; top:-12px; transform:rotate(45deg); white-space:nowrap; color:#6b3f2a; background:#fff7e8dd; border:1px solid #c7925f; border-radius:6px; padding:2px 5px; font-size:11px; font-weight:800; line-height:1.2; box-shadow:0 2px 5px #70452d33; pointer-events:none; }
+    .map-marker.active { background:#d39a45; z-index:6; box-shadow:0 0 0 7px #d39a4544,0 3px 14px #70452d66; }
+    .map-popup { position:absolute; z-index:7; display:none; max-width:230px; padding:12px 14px; border-radius:14px; color:#172033; background:#fff; box-shadow:0 12px 30px #102a5040; transform:translate(-50%,calc(-100% - 18px)); font-size:13px; line-height:1.5; }
+    .map-popup.show { display:block; }
+    .map-popup a { color:var(--brand); font-weight:700; }
+    .map-note { padding:12px 16px; color:var(--muted); font-size:13px; }
+    footer { color:var(--muted); font-size:13px; margin-top:34px; line-height:1.7; }
+    @media (max-width:800px) { header { display:block; } .stats { grid-template-columns:repeat(2,1fr); } .grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:540px) { .shell { padding:22px 14px 36px; } .grid { grid-template-columns:1fr; } input { min-width:100%; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div id="highlight-collage" class="highlight-collage" aria-hidden="true"></div>
+      <div>
+        <div class="eyebrow">PERSONAL TRAVEL & CINEMA ARCHIVE</div>
+      <h1>遠行成章｜我的世界旅誌與觀影檔案</h1>
+        <p class="intro">以照片記錄抵達過的地方，以電影保存當時的心情。這裡整理我的旅遊足跡與觀影筆記，讓每段回憶都能再次被搜尋、點開與回望。</p>
+      </div>
+      <div class="muted">最後更新：2026／10／15</div>
+    </header>
+
+    <div class="controls" aria-label="篩選工具">
+      <input id="search" type="search" placeholder="搜尋城市、國家、電影或心得…" aria-label="搜尋內容">
+      <select id="year" aria-label="依年份篩選"><option value="all">所有年份</option></select>
+      <button class="active" data-kind="all">全部</button>
+      <button data-kind="travel">旅行</button>
+      <button data-kind="movie">電影</button>
+    </div>
+
+    <section class="stats" aria-label="摘要統計">
+      <div class="stat"><span>旅行地點</span><strong id="travelCount">0</strong></div>
+      <div class="stat"><span>看過電影</span><strong id="movieCount">0</strong></div>
+      <div class="stat"><span>造訪國家</span><strong id="countryCount">0</strong></div>
+      <div class="stat"><span>目前顯示</span><strong id="visibleCount">0</strong></div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>我的旅行足跡</h2><span class="muted">代表照片 · 雲端分類 · 地圖位置</span></div>
+      <div id="travelGrid" class="grid"></div>
+    </section>
+
+    <section id="travel-map-section">
+      <div class="section-head"><h2>旅途地圖</h2><span class="muted">點選標記可開啟該趟旅程</span></div>
+      <div class="map-shell"><div id="travel-map" class="offline-map"></div><div class="map-note">點選標記可查看該趟旅程；標記旁的國家名稱代表旅程所在國家或地區。</div></div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>電影清單</h2><span class="muted">可連到預告片、IMDb 或搜尋頁</span></div>
+      <div id="movieGrid" class="grid"></div>
+    </section>
+
+    <footer>姜宇宸的個人旅途與觀影紀錄｜照片為旅程代表影像，完整分類保存於 Google Drive。</footer>
+  </main>
+
+  <script>
+    const records = [
+      {kind:'travel',year:2015,title:'日本－京都',place:'日本 京都',count:147,folder:'F:/姜宇宸/05.照片/04.出國旅遊/10405日本-京都',photo:'F:/姜宇宸/05.照片/04.出國旅遊/10405日本-京都/P_20150508_131102.jpg'},
+      {kind:'travel',year:2016,title:'日本－東京',place:'日本 東京',count:112,folder:'F:/姜宇宸/05.照片/04.出國旅遊/10501日本-東京',photo:'F:/姜宇宸/05.照片/04.出國旅遊/10501日本-東京/P_20160107_162953.jpg'},
+      {kind:'travel',year:2016,title:'新加坡',place:'新加坡',count:310,folder:'F:/姜宇宸/05.照片/04.出國旅遊/10511新加坡',photo:'F:/姜宇宸/05.照片/04.出國旅遊/10511新加坡/IMG_0237.JPG'},
+      {kind:'travel',year:2016,title:'美國－芝加哥、拉斯維加斯',place:'美國 芝加哥 拉斯維加斯',count:1153,folder:'F:/姜宇宸/05.照片/04.出國旅遊/10512美國-芝加哥、拉斯維加斯',photo:'F:/姜宇宸/05.照片/04.出國旅遊/10512美國-芝加哥、拉斯維加斯/IMG_0755.JPG'},
+      {kind:'travel',year:2017,title:'香港',place:'香港',count:306,folder:'F:/姜宇宸/05.照片/04.出國旅遊/10605香港',photo:'F:/姜宇宸/05.照片/04.出國旅遊/10605香港/IMG_3078.JPG'},
+      {kind:'travel',year:2017,title:'菲律賓－馬尼拉',place:'菲律賓 馬尼拉',count:452,folder:'F:/姜宇宸/05.照片/04.出國旅遊/10607菲律賓-馬尼拉',photo:'F:/姜宇宸/05.照片/04.出國旅遊/10607菲律賓-馬尼拉/IMG_3793.JPG'},
+      {kind:'travel',year:2017,title:'澳門、香港',place:'澳門 香港',count:206,folder:'F:/姜宇宸/05.照片/04.出國旅遊/10608-澳門、香港',photo:'F:/姜宇宸/05.照片/04.出國旅遊/10608-澳門、香港/IMG_4408.JPG'},
+      {kind:'travel',year:2018,title:'日本－東京',place:'日本 東京',count:152,folder:'F:/姜宇宸/05.照片/04.出國旅遊/10703日本-東京',photo:'F:/姜宇宸/05.照片/04.出國旅遊/10703日本-東京/IMG_6186.JPG'},
+      {kind:'travel',year:2018,title:'美國－加州、拉斯維加斯',place:'美國 加州 拉斯維加斯',count:588,folder:'F:/姜宇宸/05.照片/04.出國旅遊/10712美國-加州、拉斯維加斯',photo:'F:/姜宇宸/05.照片/04.出國旅遊/10712美國-加州、拉斯維加斯/IMG_8330.JPG'},
+      {kind:'travel',year:2019,title:'美國－加州',place:'美國 加州',count:23,folder:'F:/姜宇宸/05.照片/04.出國旅遊/10801美國-加州',photo:'F:/姜宇宸/05.照片/04.出國旅遊/10801美國-加州/569733242.435134.JPG'},
+      {kind:'travel',year:2019,title:'馬來西亞',place:'馬來西亞',count:496,folder:'F:/姜宇宸/05.照片/04.出國旅遊/10808馬來西亞',photo:'F:/姜宇宸/05.照片/04.出國旅遊/10808馬來西亞/ATPB5878.JPG'},
+      {kind:'travel',year:2019,title:'英國、法國',place:'英國 法國',count:876,folder:'F:/姜宇宸/05.照片/04.出國旅遊/10809英國、法國',photo:'F:/姜宇宸/05.照片/04.出國旅遊/10809英國、法國/IMG_1867.JPG'},
+      {kind:'travel',year:2023,title:'日本－東京',place:'日本 東京',count:979,folder:'F:/姜宇宸/05.照片/04.出國旅遊/11207日本-東京',photo:'F:/姜宇宸/05.照片/04.出國旅遊/11207日本-東京/IMG_0193.PNG'},
+      {kind:'travel',year:2023,title:'泰國－曼谷',place:'泰國 曼谷',count:266,folder:'F:/姜宇宸/05.照片/04.出國旅遊/11212泰國-曼谷',photo:'F:/姜宇宸/05.照片/04.出國旅遊/11212泰國-曼谷/IMG_1640.JPG'},
+      {kind:'travel',year:2024,title:'日本－北海道',place:'日本 北海道',count:981,folder:'F:/姜宇宸/05.照片/04.出國旅遊/11302日本-北海道',photo:'F:/姜宇宸/05.照片/04.出國旅遊/11302日本-北海道/02498EF5-914F-49D1-B580-0701C0A5AB04.JPEG'},
+      {kind:'travel',year:2024,title:'泰國－曼谷',place:'泰國 曼谷',count:246,folder:'F:/姜宇宸/05.照片/04.出國旅遊/11307泰國-曼谷',photo:'F:/姜宇宸/05.照片/04.出國旅遊/11307泰國-曼谷/IMG_3098.JPG'},
+      {kind:'travel',year:2024,title:'日本－北海道',place:'日本 北海道',count:366,folder:'F:/姜宇宸/05.照片/04.出國旅遊/11312日本-北海道',photo:'F:/姜宇宸/05.照片/04.出國旅遊/11312日本-北海道/IMG_5301.HEIC'},
+      {kind:'travel',year:2025,title:'埃及行',place:'埃及',count:1516,folder:'F:/姜宇宸/05.照片/04.出國旅遊/11401埃及行',photo:'F:/姜宇宸/05.照片/04.出國旅遊/11401埃及行/IMG_5767.JPG'},
+      {kind:'travel',year:2025,title:'日本－沖繩',place:'日本 沖繩',count:41,folder:'F:/姜宇宸/05.照片/04.出國旅遊/11407日本-沖繩',photo:'F:/姜宇宸/05.照片/04.出國旅遊/11407日本-沖繩/IMG_7485.HEIC'},
+      {kind:'travel',year:2026,title:'紐西蘭',place:'紐西蘭',count:1611,folder:'F:/姜宇宸/05.照片/04.出國旅遊/1150213紐西蘭',photo:'F:/姜宇宸/05.照片/04.出國旅遊/1150213紐西蘭/0211/IMG_8644.JPG'},
+      {kind:'travel',year:2026,title:'日本－沖繩',place:'日本 沖繩',count:41,folder:'F:/姜宇宸/05.照片/04.出國旅遊/1150225日本-沖繩',photo:'F:/姜宇宸/05.照片/04.出國旅遊/1150225日本-沖繩/IMG_9730.JPG'},
+      {kind:'movie', year:2025, title:'Past Lives', place:'Celine Song · 2023', note:'關於時間、選擇與人生另一種可能的安靜作品。', tags:['劇情','推薦'], imdb:'https://www.imdb.com/find/?q=Past%20Lives', search:'https://www.youtube.com/results?search_query=Past+Lives+trailer'},
+      {kind:'movie', year:2024, title:'Dune: Part Two', place:'Denis Villeneuve · 2024', note:'壯闊世界觀與聲音設計很適合大銀幕觀看。', tags:['科幻','大銀幕'], imdb:'https://www.imdb.com/find/?q=Dune%20Part%20Two', search:'https://www.youtube.com/results?search_query=Dune+Part+Two+trailer'},
+      {kind:'movie', year:2023, title:'The Holdovers', place:'Alexander Payne · 2023', note:'冬日校園、孤獨與意外建立的陪伴。', tags:['喜劇','冬日'], imdb:'https://www.imdb.com/find/?q=The%20Holdovers', search:'https://www.youtube.com/results?search_query=The+Holdovers+trailer'}
+    ];
+    const state = {kind:'all', query:'', year:'all'};
+    const $ = id => document.getElementById(id);
+    const years = [...new Set(records.map(r=>r.year))].sort((a,b)=>b-a);
+    years.forEach(y => $('year').insertAdjacentHTML('beforeend', `<option value="${y}">${y}</option>`));
+    function filtered(){ return records.filter(r => (state.kind==='all'||r.kind===state.kind) && (state.year==='all'||String(r.year)===state.year) && `${r.title} ${r.place} ${r.note||''} ${(r.tags||[]).join(' ')}`.toLowerCase().includes(state.query.toLowerCase())); }
+    const siteAssetRoot='assets/';
+    function assetUrl(relative){ return siteAssetRoot + relative.split('/').map(encodeURIComponent).join('/'); }
+    function fileUrl(path){ const root='F:/姜宇宸/05.照片/04.出國旅遊/'; return path ? assetUrl(path.replace(root,'').replace(/\//g,'__')) : ''; }
+    const driveTravelRoot='https://drive.google.com/drive/folders/1JVrVuIHJcuiJw8JShIqARejLUQMMY33v';
+    const driveFolders={
+      '10405日本-京都':'1y3Fem1-xEo9-jO58zqwSU6us3SrcwWfC','10501日本-東京':'1_Q7WXaGXoEGNdRxu87J4yHpcdx0Zd4u-','10511新加坡':'1H4uHBh5STkkJNzGfcPyLlMa6B9N525x9','10512美國-芝加哥、拉斯維加斯':'1qYKpgTE919pJaOJ6D1xJF__4C-QccAOy','10605香港':'1puH68DJJiouwxHkrep7rf7TnqMw54Kkx','10607菲律賓-馬尼拉':'1cHBikBJKPQUkmCv2-bGUnZqH_PkN8Nwn','10608-澳門、香港':'12VELYjmxjy9xcNz1amVB5OtANbfqGgbX','10703日本-東京':'1DhjKc0-V51PsB3bGtlpkisjWDm1LIexN','10712美國-加州、拉斯維加斯':'1hXYXEqjo4ZWYV5x3WQv30g8hXGBlMs2t','10801美國-加州':'1MpfJaCptYA6E2D3d5xO40qt1iyNXMvN-','10808馬來西亞':'1QEd1jY20lCXdSRsjdE32GcZdKCZTKybQ','10809英國、法國':'1tsTPUPKKDDLitCsmEjR847lxDJgOyb-C','11207日本-東京':'1qC5-f_mSYlenO9x9FwPiIk0-acn28Dpy','11212泰國-曼谷':'1JQFoE8K0RxHwOt0HpImbaZATWk5km4pR','11302日本-北海道':'1ImFdk6m5Jb2BgxG_1ONdktkBBzEn8-an','11307泰國-曼谷':'1K3LEfAyl1cK0gb-R5HMolk_1tISnsHom','11312日本-北海道':'1gXzgJ4jrhSNV3Q0TmfZGMqUz3cnfzeyN','11401埃及行':'1vvRHYa3nhUTwvdmbhL7VduDtEi6Ma4oM','11407日本-沖繩':'1aR6F7Ip2qJ49Q0PNoutI6p4mVnzq1bMI','1150213紐西蘭':'1IyAvlgSQKVoJm7Tqo3mCPbG5qxjJawdg','1150225日本-沖繩':'1IOC1acTHfgPE_X9gbHtlGYd-tavxH-A_'
+    };
+    const coordinates={
+      '10405日本-京都':[35.0116,135.7681],'10501日本-東京':[35.6762,139.6503],'10511新加坡':[1.3521,103.8198],'10512美國-芝加哥、拉斯維加斯':[41.8781,-87.6298],'10605香港':[22.3193,114.1694],'10607菲律賓-馬尼拉':[14.5995,120.9842],'10608-澳門、香港':[22.1987,113.5439],'10703日本-東京':[35.6762,139.6503],'10712美國-加州、拉斯維加斯':[34.0522,-118.2437],'10801美國-加州':[34.0522,-118.2437],'10808馬來西亞':[3.1390,101.6869],'10809英國、法國':[48.8566,2.3522],'11207日本-東京':[35.6762,139.6503],'11212泰國-曼谷':[13.7563,100.5018],'11302日本-北海道':[43.0618,141.3545],'11307泰國-曼谷':[13.7563,100.5018],'11312日本-北海道':[43.0618,141.3545],'11401埃及行':[30.0444,31.2357],'11407日本-沖繩':[26.2124,127.6809],'1150213紐西蘭':[-36.8509,174.7645],'1150225日本-沖繩':[26.2124,127.6809]
+    };
+    const countryLabels=[
+      ['加拿大',56,-106,false],['美國',38,-97,true],['墨西哥',23,-102,false],['巴西',-10,-52,false],['英國',54,-2,true],['法國',46,2,true],['埃及',27,30,true],['南非',-30,24,false],['印度',22,79,false],['中國',35,104,false],['日本',36,138,true],['香港',22.3,114.2,true],['澳門',22.2,113.5,true],['菲律賓',12,122,true],['新加坡',1.3,103.8,true],['馬來西亞',4,102,true],['泰國',15,101,true],['澳洲',-25,134,false],['紐西蘭',-41,174,true]
+    ];
+    const recordCountries={
+      '10405日本-京都':'日本','10501日本-東京':'日本','10511新加坡':'新加坡','10512美國-芝加哥、拉斯維加斯':'美國','10605香港':'香港','10607菲律賓-馬尼拉':'菲律賓','10608-澳門、香港':'澳門／香港','10703日本-東京':'日本','10712美國-加州、拉斯維加斯':'美國','10801美國-加州':'美國','10808馬來西亞':'馬來西亞','10809英國、法國':'英國／法國','11207日本-東京':'日本','11212泰國-曼谷':'泰國','11302日本-北海道':'日本','11307泰國-曼谷':'泰國','11312日本-北海道':'日本','11401埃及行':'埃及','11407日本-沖繩':'日本','1150213紐西蘭':'紐西蘭','1150225日本-沖繩':'日本'
+    };
+    const folderKey=r=>r.folder.split('/').pop();
+    const countryForRecord=r=>recordCountries[folderKey(r)]||r.place.split(' ')[0];
+    const driveFolderUrl=r=>`https://drive.google.com/drive/folders/${driveFolders[folderKey(r)]||driveTravelRoot.split('/').pop()}`;
+    function card(r){ const isTravel=r.kind==='travel'; const photo=fileUrl(r.photo); const style=photo?` style="background-image:linear-gradient(0deg,#111b,transparent 65%),url('${photo}')"`:''; const tags=isTravel?['旅遊照片',`${r.count} 張`]:r.tags; return `<article class="card"><div class="cover ${isTravel?'':'movie'}"${style}><h3>${r.title}</h3></div><div class="body"><div class="meta"><span>${r.place}</span><span>${r.year}</span></div><p>${isTravel?`照片集：${r.count} 張照片。這趟旅程的代表影像與完整分類已保存於雲端。`:r.note}</p><div>${tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div><div class="actions">${isTravel?`<a href="${driveFolderUrl(r)}" target="_blank" rel="noreferrer">開啟對應雲端資料夾</a><a href="#travel-map-section" onclick="focusMap('${folderKey(r)}');return false;">在地圖上查看</a>`:''}<a href="https://www.google.com/search?q=${encodeURIComponent(r.place+' '+r.title)}" target="_blank" rel="noreferrer">搜尋相關</a>${!isTravel?`<a href="${r.imdb}" target="_blank" rel="noreferrer">IMDb</a>`:''}</div></div></article>`; }
+    const highlightPhotos=['高光時刻__飛行傘.png','高光時刻__浮淺.png','高光時刻__滑雪.png','高光時刻__IMG_1819.JPG','高光時刻__IMG_E9756.JPG'];
+    function initHighlightCollage(){ const el=$('highlight-collage'); if(!el)return; el.innerHTML=highlightPhotos.map(p=>`<div class="highlight-tile" style="background-image:url('${assetUrl(p)}')"></div>`).join(''); }
+    const mapMarkers={};
+    function projectPoint([lat,lon]){ return {x:((lon+180)/360)*100,y:((90-lat)/180)*100}; }
+    function visitedCountryText(){ return countryLabels.filter(([, , , visited])=>visited).map(([name,lat,lon])=>{const p=projectPoint([lat,lon]); return `<g class="country-label visited" transform="translate(${p.x*10},${p.y*5})"><circle class="country-dot" r="3"/><text y="-7">${name}</text></g>`;}).join(''); }
+    function initMap(){ const el=$('travel-map'); if(!el||el.dataset.ready)return; el.dataset.ready='1'; const land=`<path class="land" d="M72 100C45 81 20 89 15 115l17 19 2 30 28 13 20-16 28 5 29-20-9-24 18-18-28-14zM163 246l-20 24 10 39 16 25 12 42 25 31 18-12-8-39 11-29-14-34-16-25-18-18zM246 88l-18-20-25 5-13 22 15 14 27-2 18-11zM430 112l-19-13-20 11-4 22 21 10 25-9 10-13zM470 132l-22 20 8 27 26 16 13 32 21 22 28-3 6-23-17-22 2-28-24-18-10-22zM526 94l-13 22 12 18 28 1 18-14-11-21zM588 154l-22 13-8 26 17 16 26-4 11-21-7-22zM640 181l-28 18-8 31 18 15 33-6 17-26-8-24zM735 291l28 5 28 21 39 1 29 18-16 17-46-4-26-18-37-6z"/>`; const lines=Array.from({length:7},(_,i)=>`<path class="graticule" d="M0 ${i*83.33}H1000"/>`).join('')+Array.from({length:13},(_,i)=>`<path class="graticule" d="M${i*83.33} 0V500"/>`).join(''); const labels=''; const oceanLabels=`<text class="ocean-label" x="340" y="250">ATLANTIC OCEAN</text><text class="ocean-label" x="650" y="285">INDIAN OCEAN</text><text class="ocean-label" x="515" y="460">SOUTHERN OCEAN</text><text class="ocean-label" x="515" y="48">ARCTIC OCEAN</text>`; const compass=`<g class="compass" transform="translate(70 425)"><circle r="28" fill="none" stroke-width="1"/><path d="M0-38L6-5 0 0-6-5zM0 38L6 5 0 0-6 5zM-38 0L-5-6 0 0-5 6zM38 0L5-6 0 0 5 6z"/><text x="-4" y="-46" font-size="13">N</text><text x="-4" y="54" font-size="13">S</text><text x="-49" y="5" font-size="13">W</text><text x="42" y="5" font-size="13">E</text></g>`; const countryBoundaries=`<path class="country-boundary" d="M74 93l12 38M101 93l-9 44M144 108l36 2M174 250l28 20M180 280l28 12M470 136l22 23M500 130l18 37M530 96l-8 38M557 101l-18 38M612 160l15 25M644 184l-11 40M744 298l40 18M783 300l-17 32M828 316l-20 18"/>`; const countryText=visitedCountryText(); const points=records.filter(r=>r.kind==='travel').map(r=>{const key=folderKey(r), c=coordinates[key], p=projectPoint(c); return `<button class="map-marker" data-key="${key}" style="left:${p.x}%;top:${p.y}%" title="${r.title}"><span></span><b>${countryForRecord(r)}</b></button>`;}).join(''); el.innerHTML=`<div class="map-toolbar">木質世界地圖 · 國家層級旅程標記</div><svg viewBox="0 0 1000 500" preserveAspectRatio="none" aria-label="木質風格國家層級向量世界地圖"><defs><linearGradient id="oceanFill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a2a48"/><stop offset=".55" stop-color="#0e5b7e"/><stop offset="1" stop-color="#062f51"/></linearGradient><linearGradient id="landFill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6ddaa"/><stop offset=".48" stop-color="#c98b59"/><stop offset="1" stop-color="#8c5238"/></linearGradient><filter id="woodTexture" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="3" seed="8" result="noise"/><feColorMatrix in="noise" type="saturate" values="0" result="gray"/><feComponentTransfer in="gray"><feFuncA type="table" tableValues="0 .22"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter></defs><rect class="ocean" width="1000" height="500"/>${lines}${land}${countryBoundaries}${oceanLabels}${compass}${labels}${countryText}</svg><div class="map-points">${points}</div><div id="map-popup" class="map-popup"></div>`; el.querySelectorAll('.map-marker').forEach(btn=>btn.addEventListener('click',()=>showMapPoint(btn.dataset.key))); records.filter(r=>r.kind==='travel').forEach(r=>{ const key=folderKey(r); mapMarkers[key]=el.querySelector(`[data-key="${key}"]`); }); }
+    function initRealWorldMap(){ const el=$('travel-map'); if(!el||el.dataset.ready)return; el.dataset.ready='1'; const lines=Array.from({length:7},(_,i)=>`<path class="graticule" d="M0 ${i*83.33}H1000"/>`).join('')+Array.from({length:13},(_,i)=>`<path class="graticule" d="M${i*83.33} 0V500"/>`).join(''); const oceanLabels=`<text class="ocean-label" x="340" y="250">ATLANTIC OCEAN</text><text class="ocean-label" x="650" y="285">INDIAN OCEAN</text><text class="ocean-label" x="515" y="460">SOUTHERN OCEAN</text><text class="ocean-label" x="515" y="48">ARCTIC OCEAN</text>`; const compass=`<g class="compass" transform="translate(70 425)"><circle r="28" fill="none" stroke-width="1"/><path d="M0-38L6-5 0 0-6-5zM0 38L6 5 0 0-6 5zM-38 0L-5-6 0 0-5 6zM38 0L5-6 0 0 5 6z"/><text x="-4" y="-46" font-size="13">N</text><text x="-4" y="54" font-size="13">S</text><text x="-49" y="5" font-size="13">W</text><text x="42" y="5" font-size="13">E</text></g>`; const countryText=visitedCountryText(); const points=records.filter(r=>r.kind==='travel').map(r=>{const key=folderKey(r), c=coordinates[key], p=projectPoint(c); return `<button class="map-marker" data-key="${key}" style="left:${p.x}%;top:${p.y}%" title="${r.title}"><span></span><b>${countryForRecord(r)}</b></button>`;}).join(''); el.innerHTML=`<div class="map-toolbar">世界國界圖 · 旅遊足跡標記</div><img class="world-vector" src="world-map.svg" alt="世界各國國界向量地圖"><svg class="map-overlay" viewBox="0 0 1000 500" preserveAspectRatio="none" aria-hidden="true">${lines}${oceanLabels}${compass}${countryText}</svg><div class="map-points">${points}</div><div id="map-popup" class="map-popup"></div>`; el.querySelectorAll('.map-marker').forEach(btn=>btn.addEventListener('click',()=>showMapPoint(btn.dataset.key))); records.filter(r=>r.kind==='travel').forEach(r=>{ const key=folderKey(r); mapMarkers[key]=el.querySelector(`[data-key="${key}"]`); }); }
+    function showMapPoint(key){ const r=records.find(item=>item.kind==='travel'&&folderKey(item)===key), marker=mapMarkers[key], popup=$('map-popup'); if(!r||!marker||!popup)return; document.querySelectorAll('.map-marker').forEach(el=>el.classList.remove('active')); marker.classList.add('active'); const p=projectPoint(coordinates[key]); popup.innerHTML=`<strong>${r.title}</strong><br>${r.year} · ${r.place}<br><a href="${driveFolderUrl(r)}" target="_blank" rel="noreferrer">開啟雲端資料夾</a>`; popup.style.left=`${p.x}%`; popup.style.top=`${p.y}%`; popup.classList.add('show'); }
+    function focusMap(key){ showMapPoint(key); document.getElementById('travel-map-section').scrollIntoView({behavior:'smooth'}); }
+    function render(){ const rows=filtered(); $('travelGrid').innerHTML=rows.filter(r=>r.kind==='travel').map(card).join('')||'<div class="empty">找不到符合條件的旅行紀錄。</div>'; $('movieGrid').innerHTML=rows.filter(r=>r.kind==='movie').map(card).join('')||'<div class="empty">找不到符合條件的電影紀錄。</div>'; $('travelCount').textContent=records.filter(r=>r.kind==='travel').length; $('movieCount').textContent=records.filter(r=>r.kind==='movie').length; $('countryCount').textContent=new Set(records.filter(r=>r.kind==='travel').map(r=>r.place.split(' ')[0])).size; $('visibleCount').textContent=rows.length; }
+    $('search').addEventListener('input', e=>{state.query=e.target.value;render();});
+    $('year').addEventListener('change', e=>{state.year=e.target.value;render();});
+    document.querySelectorAll('[data-kind]').forEach(btn=>btn.addEventListener('click',()=>{state.kind=btn.dataset.kind;document.querySelectorAll('[data-kind]').forEach(b=>b.classList.toggle('active',b===btn));render();}));
+    render();
+    initHighlightCollage();
+    initRealWorldMap();
+  </script>
+</body>
+</html>
